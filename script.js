@@ -120,4 +120,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
-}); 
+});
+
+// Typeform Modal Functionality
+const modal = document.getElementById('typeform-modal');
+const closeModal = document.querySelector('.close-modal');
+
+// Show modal after 5 seconds
+setTimeout(() => {
+    modal.classList.add('show');
+}, 5000);
+
+// Close modal when clicking the X
+closeModal.addEventListener('click', () => {
+    modal.classList.remove('show');
+});
+
+// Close modal when clicking outside
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.remove('show');
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('show')) {
+        modal.classList.remove('show');
+    }
+});
+
+// Store in localStorage that user has seen the popup
+const hasSeenPopup = localStorage.getItem('hasSeenTypeformPopup');
+if (hasSeenPopup) {
+    modal.style.display = 'none';
+} else {
+    localStorage.setItem('hasSeenTypeformPopup', 'true');
+} 
